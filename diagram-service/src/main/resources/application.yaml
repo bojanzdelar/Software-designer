@@ -1,0 +1,40 @@
+server:
+  port: 8081
+
+ms:
+  cors:
+    origins: "*"
+
+spring:
+  config:
+    import: optional:secrets.yml
+  application:
+    name: diagram-service
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3307/m2z-diagram?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jackson:
+    default-property-inclusion: non_empty
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+    version: openapi_3_0
+  swagger-ui:
+    path: /swagger-ui.html
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

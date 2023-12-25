@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          "[/**]":
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+
+      routes:
+        - id: generator-service
+          uri: lb://GENERATOR-SERVICE
+          predicates:
+            - Path=/api/generator-service/**
+          filters:
+            - RewritePath=/api/generator-service/(?<path>.*), /api/$\{path}
+        - id: diagram-service
+          uri: lb://DIAGRAM-SERVICE
+          predicates:
+            - Path=/api/diagram-service/**
+          filters:
+            - RewritePath=/api/diagram-service/(?<path>.*), /api/$\{path}
+        - id: requirement-service
+          uri: lb://REQUIREMENT-SERVICE
+          predicates:
+            - Path=/api/requirement-service/**
+          filters:
+            - RewritePath=/api/requirement-service/(?<path>.*), /api/$\{path}
+
+springdoc:
+  swagger-ui:
+    path: "docs"
+    urls:
+      - name: diagram-service
+        url: /api/diagram-service/docs
+      - name: requirement-service
+        url: /api/requirement-service/docs
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka

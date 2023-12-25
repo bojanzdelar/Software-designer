@@ -1,0 +1,116 @@
+# If you encounter problems while building images for services depending on databases, separately startup databases before running this.
+
+version: '3'
+
+services:
+  database-diagram:
+    image: mysql:8.0.30-debian
+    ports: 
+      - 3307:3306
+    volumes:
+      - data-diagram:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD']
+      interval: 25s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: m2z-diagram
+
+  database-requirement:
+    image: mysql:8.0.30-debian
+    ports: 
+      - 3308:3306
+    volumes:
+      - data-requirement:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD' ]
+      interval: 25s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: m2z-requirement
+
+  backend-discovery-server:
+    build:
+      context: ../discovery-server
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    healthcheck:
+      test: wget --spider --quiet 'http://localhost:8761/actuator/health/' || exit 1
+      interval: 25s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+   
+  backend-api-gateway:
+    build:
+      context: ../api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      backend-discovery-server:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+  backend-diagram-service:
+    build:
+      context: ../diagram-service
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    depends_on:
+      backend-discovery-server:
+        condition: service_healthy
+      database-diagram:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+  backend-requirement-service:
+    build:
+      context: ../requirement-service
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+    depends_on:
+      backend-discovery-server:
+        condition: service_healthy
+      database-requirement:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+  backend-generator-service:
+    build:
+      context: ../generator-service
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      backend-discovery-server:
+        condition: service_healthy
+      database-diagram:
+        condition: service_healthy
+    environment:
+      ACTIVE_PROFILE: prod
+
+  frontend-app:
+    build:
+      context: ../client-app
+      dockerfile: Dockerfile
+    ports:
+      - 80:8080
+
+volumes:
+  data-diagram:
+  data-requirement:

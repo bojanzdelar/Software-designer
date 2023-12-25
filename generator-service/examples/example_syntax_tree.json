@@ -1,0 +1,522 @@
+{
+  "zkfFHV4jXpPFQw0GAbJ--0": {
+    "type": "class",
+    "inner": "false",
+    "name": "Teller",
+    "properties": {},
+    "methods": {
+      "1": {
+        "access": "public",
+        "abstract": "false",
+        "name": "collectMoney",
+        "parameters": {
+          "1": {
+            "name": "customer",
+            "type": "Customer"
+          },
+          "2": {
+            "name": "amount",
+            "type": "double"
+          }
+        },
+        "return_type": "boolean"
+      },
+      "2": {
+        "access": "public",
+        "abstract": "false",
+        "name": "openAccount",
+        "parameters": {
+          "1": {
+            "name": "customer",
+            "type": "Customer"
+          }
+        },
+        "return_type": "boolean"
+      },
+      "3": {
+        "access": "public",
+        "abstract": "false",
+        "name": "closeAccount",
+        "parameters": {
+          "1": {
+            "name": "customer",
+            "type": "Customer"
+          }
+        },
+        "return_type": "boolean"
+      },
+      "4": {
+        "access": "public",
+        "abstract": "false",
+        "name": "loanRequest",
+        "parameters": {
+          "1": {
+            "name": "customer",
+            "type": "Customer"
+          }
+        },
+        "return_type": "boolean"
+      },
+      "5": {
+        "access": "public",
+        "abstract": "false",
+        "name": "provideInfo",
+        "parameters": {
+          "1": {
+            "name": "customer",
+            "type": "Customer"
+          }
+        },
+        "return_type": "void"
+      },
+      "6": {
+        "access": "public",
+        "abstract": "false",
+        "name": "issueCard",
+        "parameters": {
+          "1": {
+            "name": "customer",
+            "type": "Customer"
+          },
+          "2": {
+            "name": "type",
+            "type": "String"
+          }
+        },
+        "return_type": "boolean"
+      }
+    },
+    "relationships": {
+      "implements": [],
+      "extends": [
+        "2JxM8UlmAFkqMBroLjRq-9"
+      ],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [
+        "2JxM8UlmAFkqMBroLjRq-62"
+      ],
+      "inner": []
+    }
+  },
+  "zkfFHV4jXpPFQw0GAbJ--17": {
+    "type": "abstract",
+    "inner": "false",
+    "name": "Account",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "id",
+        "type": "int"
+      }
+    },
+    "methods": {
+      "1": {
+        "access": "public",
+        "abstract": "true",
+        "name": "getIdentifier",
+        "parameters": {},
+        "return_type": "String"
+      }
+    },
+    "relationships": {
+      "implements": [
+        "9L1p5aAtbspUq4mi50zd-26"
+      ],
+      "extends": [],
+      "association": [
+        "2JxM8UlmAFkqMBroLjRq-34"
+      ],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "2JxM8UlmAFkqMBroLjRq-9": {
+    "type": "abstract",
+    "inner": "false",
+    "name": "Person",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "name",
+        "type": "String"
+      }
+    },
+    "methods": {
+      "1": {
+        "access": "public",
+        "abstract": "true",
+        "name": "sayGoodbye",
+        "parameters": {
+          "1": {
+            "name": "language",
+            "type": "String"
+          }
+        },
+        "return_type": "void"
+      }
+    },
+    "relationships": {
+      "implements": [],
+      "extends": [
+        "9L1p5aAtbspUq4mi50zd-73"
+      ],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "2JxM8UlmAFkqMBroLjRq-34": {
+    "type": "class",
+    "inner": "false",
+    "name": "Customer",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "address",
+        "type": "String"
+      },
+      "2": {
+        "access": "private",
+        "name": "phoneNum",
+        "type": "String"
+      }
+    },
+    "methods": {
+      "1": {
+        "access": "public",
+        "abstract": "false",
+        "name": "generalInquiry",
+        "parameters": {},
+        "return_type": "boolean"
+      },
+      "2": {
+        "access": "public",
+        "abstract": "false",
+        "name": "depositMoney",
+        "parameters": {
+          "1": {
+            "name": "amount",
+            "type": "double"
+          }
+        },
+        "return_type": "boolean"
+      },
+      "3": {
+        "access": "public",
+        "abstract": "false",
+        "name": "withdrawMoney",
+        "parameters": {
+          "1": {
+            "name": "amount",
+            "type": "double"
+          }
+        },
+        "return_type": "boolean"
+      },
+      "4": {
+        "access": "public",
+        "abstract": "false",
+        "name": "openAccount",
+        "parameters": {},
+        "return_type": "Account"
+      },
+      "5": {
+        "access": "public",
+        "abstract": "false",
+        "name": "closeAccount",
+        "parameters": {},
+        "return_type": "Account"
+      },
+      "6": {
+        "access": "public",
+        "abstract": "false",
+        "name": "applyForLoan",
+        "parameters": {
+          "1": {
+            "name": "amount",
+            "type": "double"
+          },
+          "2": {
+            "name": "years",
+            "type": "int"
+          }
+        },
+        "return_type": "boolean"
+      },
+      "7": {
+        "access": "public",
+        "abstract": "false",
+        "name": "requestCard",
+        "parameters": {
+          "1": {
+            "name": "type",
+            "type": "String"
+          }
+        },
+        "return_type": "boolean"
+      }
+    },
+    "relationships": {
+      "implements": [],
+      "extends": [
+        "2JxM8UlmAFkqMBroLjRq-9"
+      ],
+      "association": [
+        "zkfFHV4jXpPFQw0GAbJ--17"
+      ],
+      "aggregationChildren": [],
+      "aggregationParents": [
+        "2JxM8UlmAFkqMBroLjRq-62"
+      ],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "2JxM8UlmAFkqMBroLjRq-51": {
+    "type": "class",
+    "inner": "false",
+    "name": "Checking",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "interestCost",
+        "type": "double"
+      }
+    },
+    "methods": {},
+    "relationships": {
+      "implements": [],
+      "extends": [
+        "zkfFHV4jXpPFQw0GAbJ--17"
+      ],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "2JxM8UlmAFkqMBroLjRq-55": {
+    "type": "class",
+    "inner": "false",
+    "name": "Savings",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "interestPay",
+        "type": "double"
+      }
+    },
+    "methods": {},
+    "relationships": {
+      "implements": [],
+      "extends": [
+        "zkfFHV4jXpPFQw0GAbJ--17"
+      ],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "2JxM8UlmAFkqMBroLjRq-62": {
+    "type": "class",
+    "inner": "false",
+    "name": "Bank",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "id",
+        "type": "int"
+      },
+      "2": {
+        "access": "private",
+        "name": "name",
+        "type": "String"
+      }
+    },
+    "methods": {},
+    "relationships": {
+      "implements": [],
+      "extends": [],
+      "association": [],
+      "aggregationChildren": [
+        "2JxM8UlmAFkqMBroLjRq-34"
+      ],
+      "aggregationParents": [],
+      "compositionChildren": [
+        "zkfFHV4jXpPFQw0GAbJ--0"
+      ],
+      "compositionParents": [],
+      "inner": [
+        "suJ9axyi_z5UWAV_gMVi-0"
+      ]
+    }
+  },
+  "9L1p5aAtbspUq4mi50zd-19": {
+    "type": "interface",
+    "inner": "false",
+    "name": "Suspendable",
+    "properties": {},
+    "methods": {
+      "1": {
+        "access": "public",
+        "abstract": "true",
+        "name": "suspend",
+        "parameters": {
+          "1": {
+            "name": "days",
+            "type": "int"
+          }
+        },
+        "return_type": "boolean"
+      }
+    },
+    "relationships": {
+      "implements": [],
+      "extends": [],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "9L1p5aAtbspUq4mi50zd-26": {
+    "type": "interface",
+    "inner": "false",
+    "name": "Closeable",
+    "properties": {},
+    "methods": {
+      "1": {
+        "access": "public",
+        "abstract": "true",
+        "name": "close",
+        "parameters": {},
+        "return_type": "boolean"
+      }
+    },
+    "relationships": {
+      "implements": [],
+      "extends": [
+        "9L1p5aAtbspUq4mi50zd-19"
+      ],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "9L1p5aAtbspUq4mi50zd-73": {
+    "type": "abstract",
+    "inner": "false",
+    "name": "BasePerson",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "id",
+        "type": "int"
+      }
+    },
+    "methods": {
+      "1": {
+        "access": "public",
+        "abstract": "true",
+        "name": "sayHelloEnglish",
+        "parameters": {},
+        "return_type": "void"
+      },
+      "2": {
+        "access": "public",
+        "abstract": "true",
+        "name": "sayHelloGerman",
+        "parameters": {},
+        "return_type": "void"
+      }
+    },
+    "relationships": {
+      "implements": [],
+      "extends": [],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  },
+  "suJ9axyi_z5UWAV_gMVi-0": {
+    "type": "class",
+    "inner": "true",
+    "name": "Branch",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "address",
+        "type": "String"
+      },
+      "2": {
+        "access": "private",
+        "name": "phoneNumber",
+        "type": "String"
+      }
+    },
+    "methods": {},
+    "relationships": {
+      "implements": [],
+      "extends": [],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": [
+        "uBXvhKZq9AbM12ReGnq7-4"
+      ]
+    }
+  },
+  "uBXvhKZq9AbM12ReGnq7-4": {
+    "type": "class",
+    "inner": "true",
+    "name": "Vault",
+    "properties": {
+      "1": {
+        "access": "private",
+        "name": "id",
+        "type": "String"
+      },
+      "2": {
+        "access": "private",
+        "name": "occupied",
+        "type": "boolean"
+      }
+    },
+    "methods": {},
+    "relationships": {
+      "implements": [],
+      "extends": [],
+      "association": [],
+      "aggregationChildren": [],
+      "aggregationParents": [],
+      "compositionChildren": [],
+      "compositionParents": [],
+      "inner": []
+    }
+  }
+}

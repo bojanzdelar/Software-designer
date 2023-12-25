@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  database-diagram:
+    image: mysql:8.0.30-debian
+    ports: 
+      - 3307:3306
+    volumes:
+      - data-diagram:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: m2z-diagram
+
+  database-requirement:
+    image: mysql:8.0.30-debian
+    ports: 
+      - 3308:3306
+    volumes:
+      - data-requirement:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: m2z-requirement
+
+volumes:
+  data-diagram:
+  data-requirement:
